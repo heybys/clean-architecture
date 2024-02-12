@@ -41,7 +41,7 @@ tasks.named('test') {
 spotless {
     java {
         palantirJavaFormat()
-        // importOrder()
+        importOrder()
         removeUnusedImports()
         trimTrailingWhitespace()
     }
