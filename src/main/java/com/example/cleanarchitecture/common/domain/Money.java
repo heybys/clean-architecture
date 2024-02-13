@@ -1,16 +1,23 @@
 package com.example.cleanarchitecture.common.domain;
 
 import java.math.BigInteger;
+import lombok.AccessLevel;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 @Value
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Money {
 
     public static Money ZERO = Money.of(0L);
 
     @NonNull
     BigInteger amount;
+
+    public static Money of(long value) {
+        return new Money(BigInteger.valueOf(value));
+    }
 
     public boolean isPositiveOrZero() {
         return this.amount.compareTo(BigInteger.ZERO) >= 0;
@@ -30,10 +37,6 @@ public class Money {
 
     public boolean isGreaterThan(Money money) {
         return this.amount.compareTo(money.amount) >= 1;
-    }
-
-    public static Money of(long value) {
-        return new Money(BigInteger.valueOf(value));
     }
 
     public Money plus(Money money) {

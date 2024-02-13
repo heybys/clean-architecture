@@ -3,10 +3,13 @@ package com.example.cleanarchitecture.account.domain;
 import com.example.cleanarchitecture.account.domain.Account.AccountId;
 import com.example.cleanarchitecture.common.domain.Money;
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
-@Value(staticConstructor = "of")
+@Value
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Activity {
 
     ActivityId id;
@@ -32,7 +35,7 @@ public class Activity {
             @NonNull AccountId targetAccountId,
             @NonNull LocalDateTime timestamp,
             @NonNull Money money) {
-        return Activity.of(null, ownerAccountId, sourceAccountId, targetAccountId, timestamp, money);
+        return new Activity(null, ownerAccountId, sourceAccountId, targetAccountId, timestamp, money);
     }
 
     @Value

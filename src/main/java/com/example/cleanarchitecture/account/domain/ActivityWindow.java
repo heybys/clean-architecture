@@ -14,6 +14,7 @@ import lombok.Value;
 @Value
 public class ActivityWindow {
 
+    @NonNull
     List<Activity> activities;
 
     public ActivityWindow(@NonNull List<Activity> activities) {
