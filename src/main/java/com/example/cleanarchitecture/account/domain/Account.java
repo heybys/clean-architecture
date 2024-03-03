@@ -1,30 +1,24 @@
 package com.example.cleanarchitecture.account.domain;
 
-import com.example.cleanarchitecture.common.domain.Money;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NonNull;
 import lombok.Value;
 
 @Value
-@Getter(AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
-
     AccountId id;
 
+    @NonNull
     Money baselineBalance;
 
     ActivityWindow activityWindow;
 
-    private static Account withId(AccountId accountId, Money baselineBalance, ActivityWindow activityWindow) {
+    public static Account withId(AccountId accountId, Money baselineBalance, ActivityWindow activityWindow) {
         return new Account(accountId, baselineBalance, activityWindow);
-    }
-
-    public static Account withoutId(Money baselineBalance, ActivityWindow activityWindow) {
-        return new Account(null, baselineBalance, activityWindow);
     }
 
     public Optional<AccountId> getId() {
@@ -41,7 +35,7 @@ public class Account {
             return false;
         }
 
-        Activity withdraw = Activity.withoutId(this.id, this.id, targetAccountId, LocalDateTime.now(), money);
+        Activity withdraw = Activity.withoutId(this.id, this.id, targetAccountId, money, LocalDateTime.now());
         this.activityWindow.addActivity(withdraw);
 
         return true;
@@ -52,7 +46,7 @@ public class Account {
     }
 
     public boolean deposit(Money money, AccountId sourceAccountId) {
-        Activity deposit = Activity.withoutId(this.id, sourceAccountId, this.id, LocalDateTime.now(), money);
+        Activity deposit = Activity.withoutId(this.id, sourceAccountId, this.id, money, LocalDateTime.now());
         this.activityWindow.addActivity(deposit);
 
         return true;

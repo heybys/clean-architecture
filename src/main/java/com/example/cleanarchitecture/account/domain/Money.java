@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.common.domain;
+package com.example.cleanarchitecture.account.domain;
 
 import java.math.BigInteger;
 import lombok.AccessLevel;

@@ -1,7 +1,6 @@
 package com.example.cleanarchitecture.account.domain;
 
 import com.example.cleanarchitecture.account.domain.Account.AccountId;
-import com.example.cleanarchitecture.common.domain.Money;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
